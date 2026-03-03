@@ -11,17 +11,41 @@ export default function ApplyForm() {
 
   return (
     <>
-      <form action={formAction}>
+      <form action={formAction} style={{ display: "flex", flexDirection: "column", gap: "16px", maxWidth: "500px" }}>
         <input
           type="text"
           name="name"
-          placeholder="Tu nombre"
+          placeholder="Nombre completo"
           required
-          style={{ border: "1px solid black", padding: "8px" }}
         />
 
-        <button type="submit" style={{ marginLeft: "10px" }}>
-          Enviar
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          required
+        />
+
+        <textarea
+          name="why"
+          placeholder="¿Por qué quieres entrar?"
+          required
+        />
+
+        <select name="financialStage" required>
+          <option value="">¿En qué punto estás financieramente?</option>
+          <option value="INICIO">Inicio</option>
+          <option value="ESTABLE">Estable</option>
+          <option value="AVANZADO">Avanzado</option>
+        </select>
+
+        <label>
+          <input type="checkbox" name="structuredCommit" />
+          Estoy dispuesto a trabajar estructuradamente
+        </label>
+
+        <button type="submit">
+          Enviar solicitud
         </button>
       </form>
 

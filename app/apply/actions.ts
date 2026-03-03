@@ -9,18 +9,24 @@ export async function submitApplication(
   formData: FormData
 ) {
   const name = formData.get("name") as string;
+  const email = formData.get("email") as string;
+  const why = formData.get("why") as string;
+  const financialStage = formData.get("financialStage") as string;
+  const structuredCommit = formData.get("structuredCommit") === "on";
 
-  if (!name || name.trim().length < 2) {
-    return { message: "Nombre inválido" };
+  if (!name || !email || !why) {
+    return { message: "Campos incompletos" };
   }
 
   const application = await prisma.application.create({
     data: {
-      name: name.trim(),
+      name,
+      email,
+      why,
+      financialStage,
+      structuredCommit,
     },
   });
 
-  console.log("Guardado en DB:", application);
-
-  return { message: `Solicitud guardada para ${application.name}` };
+  return { message: "Solicitud registrada. Será revisada manualmente." };
 }
